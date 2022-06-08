@@ -25,7 +25,9 @@ bl_info = {
 import bpy
 
 from . ue_helper_panel import UEHelper_PT_Panel
+from . mark_op import UEMark_OT_Operator
+from . unmark_op import UEUnmark_OT_Operator
 
-classes = (UEHelper_PT_Panel)
+classes = (UEHelper_PT_Panel, UEMark_OT_Operator, UEUnmark_OT_Operator)
 
 register, unregister = bpy.utils.register_classes_factory(classes)

@@ -1,6 +1,7 @@
 import bpy
 
-from . test_op import  Test_OT_Operator
+from . mark_op import UEMark_OT_Operator
+from . unmark_op import UEUnmark_OT_Operator
 
 class UEHelper_PT_Panel(bpy.types.Panel):
     bl_idname = "uehelper.main_panel"
@@ -16,8 +17,8 @@ class UEHelper_PT_Panel(bpy.types.Panel):
 
         layout.label(text="UE Export helpers:")
         col = layout.column(align=True)
-        col.operator(Test_OT_Operator.bl_idname, text="Mark selected for export", icon="CONSOLE")
-        col.operator(Test_OT_Operator.bl_idname, text="Unmark selected for export", icon="CONSOLE")
-        col.operator(Test_OT_Operator.bl_idname, text="Clear export", icon="CONSOLE")
+        col.operator(UEMark_OT_Operator.bl_idname, text="Mark selected for export", icon="CONSOLE")
+        col.operator(UEUnmark_OT_Operator.bl_idname, text="Unmark selected for export", icon="CONSOLE")
+        #col.operator(Test_OT_Operator.bl_idname, text="Clear export", icon="CONSOLE")
 
         layout.separator()
