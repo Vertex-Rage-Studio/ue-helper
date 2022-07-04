@@ -38,5 +38,4 @@ Do note, that the code for traversing hierarchy is not the most efficient one an
 
 If you like this addon ping me on twitter at https://twitter.com/bOBaN_me
 
-If you found some bug or would like to see some improvements to the addon please create an issue.
-
+If you found some bug or would like to see some improvements to the addon please create an issue or join my [discord server](https://discord.gg/U56WakRzpM) (support/#ue-helper channel) 
