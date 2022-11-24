@@ -13,16 +13,17 @@
 
 bl_info = {
     "name" : "ue-helper",
-    "author" : "bOBaN",
+    "author" : "Vertex Machine @ Vertex Rage Studio",
     "description" : "Simple helper addon for Blender For Unreal Engine addon",
     "blender" : (3, 2, 0),
-    "version" : (0, 0, 1),
+    "version" : (0, 0, 2),
     "location" : "View3D",
     "warning" : "",
     "category" : "Import-Export"
 }
 
 import bpy
+from bpy.props import BoolProperty
 
 from . ue_helper_panel import UEHelper_PT_Panel
 from . mark_op import UEMark_OT_Operator
@@ -30,4 +31,19 @@ from . unmark_op import UEUnmark_OT_Operator
 
 classes = (UEHelper_PT_Panel, UEMark_OT_Operator, UEUnmark_OT_Operator)
 
-register, unregister = bpy.utils.register_classes_factory(classes)
+#register, unregister = bpy.utils.register_classes_factory(classes)
+
+def register():
+    bpy.types.Scene.ue_helper_rotate_z_setting = BoolProperty(
+        name = "Rotate Z",
+        description = "Rotate object in Z by 90 degrees?",
+        default=False
+    )
+    for cls in classes:
+        bpy.utils.register_class(cls)
+
+def unregister():
+    for cls in reversed(classes):
+        bpy.utils.unregister_class(cls)
+
+    del bpy.types.Scene.ue_helper_rotate_z_setting

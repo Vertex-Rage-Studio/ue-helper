@@ -9,5 +9,5 @@ class UEUnmark_OT_Operator(bpy.types.Operator):
 
 
     def execute(self, context):
-        mark_selected(False)
+        mark_selected(False, context)
         return {'FINISHED'}

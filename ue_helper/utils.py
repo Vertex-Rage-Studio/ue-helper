@@ -1,4 +1,5 @@
 import bpy
+from math import radians
 
 # from https://blender.stackexchange.com/questions/146685/how-to-obtain-the-parent-of-a-collection-using-python
 
@@ -18,10 +19,18 @@ def turn_collection_hierarchy_into_path(obj):
     parent_names.reverse()
     return '\\'.join(parent_names)
 
-def mark_selected(for_export = True):
+def mark_selected(for_export = True, context = None):
+    z_rot = False
+    if context:
+        z_rot = context.scene.ue_helper_rotate_z_setting
+
     for obj in bpy.context.selected_objects:
         if for_export:
             obj.ExportEnum = 'export_recursive' #Set for export
             obj.exportFolderName = "".join(turn_collection_hierarchy_into_path(obj).split())
+            if z_rot == True:
+                obj.AdditionalRotationForExport.z = radians(90)
+            else:
+                obj.AdditionalRotationForExport.z = 0
         else: 
             obj.ExportEnum = 'auto' #Set not for exporting

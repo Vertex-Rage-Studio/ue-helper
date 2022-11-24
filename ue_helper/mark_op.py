@@ -9,5 +9,5 @@ class UEMark_OT_Operator(bpy.types.Operator):
 
 
     def execute(self, context):
-        mark_selected(True)
+        mark_selected(True, context)
         return {'FINISHED'}
