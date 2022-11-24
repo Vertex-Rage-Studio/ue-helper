@@ -17,7 +17,7 @@ Let's say you have bunch of objects and you want export subset of those to unrea
 
 <img src="https://github.com/bbn777/ue-helper/blob/main/docs/01-init.jpg">
 
-Select objects that you want to export and click "Mark selected for export" from "UE Helper
+Select objects that you want to export and click "Mark selected for export" from "UE Helper. If you check "Rotate Z" option, it will add additional 90 degrees rotation on the Z axsis for the export (to match unreal's forward direction if your objects face -Y in Blender).
 
 <img src="https://github.com/bbn777/ue-helper/blob/main/docs/02-mark.jpg">
 
