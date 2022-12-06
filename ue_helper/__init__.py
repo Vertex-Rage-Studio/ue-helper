@@ -23,13 +23,14 @@ bl_info = {
 }
 
 import bpy
-from bpy.props import BoolProperty
+from bpy.props import BoolProperty, StringProperty
 
 from . ue_helper_panel import UEHelper_PT_Panel
 from . mark_op import UEMark_OT_Operator
 from . unmark_op import UEUnmark_OT_Operator
+from . unity_export import UEExport2Unity_OT_Operator
 
-classes = (UEHelper_PT_Panel, UEMark_OT_Operator, UEUnmark_OT_Operator)
+classes = (UEHelper_PT_Panel, UEMark_OT_Operator, UEUnmark_OT_Operator, UEExport2Unity_OT_Operator)
 
 #register, unregister = bpy.utils.register_classes_factory(classes)
 
@@ -39,6 +40,16 @@ def register():
         description = "Rotate object in Z by 90 degrees?",
         default=False
     )
+
+    bpy.types.Scene.ue_helper_unity_export_path = StringProperty(
+        name = "Unity fbx export path",
+        description = "Where fbx files for unity should be put?",
+        default="",
+        subtype="DIR_PATH",
+    )
+
+    bpy.types.Object.expanded = bpy.props.BoolProperty(default=False)
+
     for cls in classes:
         bpy.utils.register_class(cls)
 
@@ -46,4 +57,6 @@ def unregister():
     for cls in reversed(classes):
         bpy.utils.unregister_class(cls)
 
+    del bpy.types.Object.expanded 
+    del bpy.types.Scene.ue_helper_unity_export_path
     del bpy.types.Scene.ue_helper_rotate_z_setting
