@@ -49,7 +49,7 @@ def register():
         subtype="DIR_PATH",
     )
 
-    bpy.types.Object.expanded = bpy.props.BoolProperty(default=False)
+    bpy.types.Scene.ue_helper_unity_expanded = BoolProperty(default=False)
 
     for cls in classes:
         bpy.utils.register_class(cls)
@@ -59,6 +59,6 @@ def unregister():
     for cls in reversed(classes):
         bpy.utils.unregister_class(cls)
 
-    del bpy.types.Object.expanded
+    del bpy.types.Scene.ue_helper_unity_expanded
     del bpy.types.Scene.ue_helper_unity_export_path
     del bpy.types.Scene.ue_helper_rotate_z_setting

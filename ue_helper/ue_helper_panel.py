@@ -17,7 +17,6 @@ class UEHelper_PT_Panel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        obj = context.object
         scene = context.scene
 
         col = layout.column(align=True)
@@ -32,9 +31,11 @@ class UEHelper_PT_Panel(bpy.types.Panel):
 
         box = layout.box()
         row = box.row()
-        row.prop(obj, "expanded", icon="TRIA_DOWN" if obj.expanded else "TRIA_RIGHT", icon_only=True, emboss=False)
+        expanded = scene.ue_helper_unity_expanded
+        row.prop(scene, "ue_helper_unity_expanded", icon="TRIA_DOWN" if expanded else "TRIA_RIGHT", icon_only=True,
+                 emboss=False)
         row.label(text="Unity helpers:")
-        if obj.expanded:
+        if expanded:
             box.label(text="Use with caution, very early stage of this one.\nShould work with simple static meshes.",
                       icon="INFO")
             col = box.column(align=True)
