@@ -26,11 +26,11 @@ def mark_selected(for_export = True, context = None):
 
     for obj in bpy.context.selected_objects:
         if for_export:
-            obj.ExportEnum = 'export_recursive' #Set for export
-            obj.exportFolderName = "".join(turn_collection_hierarchy_into_path(obj).split())
+            obj.bfu_export_type = 'export_recursive' #Set for export
+            obj.bfu_export_folder_name = "".join(turn_collection_hierarchy_into_path(obj).split())
             if z_rot == True:
-                obj.AdditionalRotationForExport.z = radians(90)
+                obj.bfu_additional_rotation_for_export.z = radians(90)
             else:
-                obj.AdditionalRotationForExport.z = 0
+                obj.bfu_additional_rotation_for_export.z = 0
         else: 
-            obj.ExportEnum = 'auto' #Set not for exporting
+            obj.bfu_export_type = 'auto' #Set not for exporting
