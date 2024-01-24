@@ -1,5 +1,4 @@
 import os
-
 import bpy
 
 
@@ -10,7 +9,9 @@ class UEExport2Unity_OT_Operator(bpy.types.Operator):
 
     def execute(self, context):
         print("\n\nReady to go!\n")
-        export_path = context.scene.ue_helper_unity_export_path
+        relative_path = context.scene.ue_helper_unity_export_path
+        absolute_path = bpy.path.abspath(relative_path)
+        export_path = os.path.normpath(absolute_path)
         if os.path.exists(export_path) is False:
             os.makedirs(export_path)
 
@@ -23,8 +24,8 @@ class UEExport2Unity_OT_Operator(bpy.types.Operator):
         # export obj by obj
         for obj in bpy.context.scene.objects:
             if obj.type == "MESH":
-                if obj.ExportEnum == 'export_recursive':
-                    export_suffix = obj.exportFolderName
+                if obj.bfu_export_type == 'export_recursive':
+                    export_suffix = obj.bfu_export_folder_name
                     export_subdir = export_path
                     if export_suffix != "SceneCollection":
                         export_subdir = os.path.join(export_path, export_suffix)
