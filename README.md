@@ -1,5 +1,4 @@
 # ue-helper
-> ⚠️Currently the addon doesn't work with newest version of Blender For Unreal Engine addon. Patch is in the making.
 
  Very simple helper Addon for Blender For Unreal Engine addon (https://github.com/xavier150/Blender-For-UnrealEngine-Addons). 
  
