@@ -23,7 +23,7 @@ bl_info = {
     "author": "Vertex Machine @ Vertex Rage Studio",
     "description": "Simple helper addon for Blender For Unreal Engine addon",
     "blender": (4, 0, 0),
-    "version": (0, 0, 3),
+    "version": (0, 0, 4),
     "location": "View3D",
     "warning": "",
     "category": "Import-Export"
