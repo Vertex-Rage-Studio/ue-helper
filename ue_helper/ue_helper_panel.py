@@ -26,6 +26,7 @@ class UEHelper_PT_Panel(bpy.types.Panel):
         layout.separator()
         layout.label(text="Options:")
         layout.prop(scene, "ue_helper_rotate_z_setting")
+        layout.prop(scene, "ue_helper_blender_gen_lightmap_uvs")
 
         layout.separator()
 

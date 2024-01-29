@@ -42,6 +42,13 @@ def register():
         default=False
     )
 
+    bpy.types.Scene.ue_helper_blender_gen_lightmap_uvs = BoolProperty(
+        name="Generate Lightmap UVs",
+        description="Generate lightmap UVs for selected objects using Blender's method (quality=30, margin=0.2)?" 
+                    "\nDo note, will also check/uncheck the option in BfU during marking for export",
+        default=False
+    )
+
     bpy.types.Scene.ue_helper_unity_export_path = StringProperty(
         name="Unity fbx export path",
         description="Where fbx files for unity should be put?",
