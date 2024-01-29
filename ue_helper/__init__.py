@@ -23,12 +23,11 @@ bl_info = {
     "author": "Vertex Machine @ Vertex Rage Studio",
     "description": "Simple helper addon for Blender For Unreal Engine addon",
     "blender": (4, 0, 0),
-    "version": (0, 0, 4),
+    "version": (0, 0, 5),
     "location": "View3D",
     "warning": "",
     "category": "Import-Export"
 }
-
 
 classes = (UEHelper_PT_Panel, UEMark_OT_Operator, UEUnmark_OT_Operator, UEExport2Unity_OT_Operator)
 
@@ -44,8 +43,14 @@ def register():
 
     bpy.types.Scene.ue_helper_blender_gen_lightmap_uvs = BoolProperty(
         name="Generate Lightmap UVs",
-        description="Generate lightmap UVs for selected objects using Blender's method (quality=30, margin=0.2)?" 
-                    "\nDo note, will also check/uncheck the option in BfU during marking for export",
+        description=(
+            "Generate lightmap UVs for selected objects.\n"
+            "Features:\n"
+            "- Utilizes Blender's built-in lightmap UV generation with a quality setting of 30 and a margin of 0.2.\n"
+            "- Toggles the 'Generate Lightmap UVs' option in BfU.\n"
+            "- Effective only during the 'Mark for Export' process.\n"
+            "- Adds a second UV map exclusively for objects with only one existing UV map"
+        ),
         default=False
     )
 

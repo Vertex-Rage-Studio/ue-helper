@@ -3,7 +3,7 @@ import bpy
 from .mark_op import UEMark_OT_Operator
 from .unmark_op import UEUnmark_OT_Operator
 from .unity_export import UEExport2Unity_OT_Operator
-
+import ue_helper
 
 class UEHelper_PT_Panel(bpy.types.Panel):
     bl_idname = "UEHELPER_PT_Panel"
@@ -18,6 +18,11 @@ class UEHelper_PT_Panel(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         scene = context.scene
+
+        version_str = ".".join([str(x) for x in ue_helper.bl_info["version"]])
+        credit_box = layout.box()
+        credit_box.label(text="UE Helper by Vertex Machine @ Vertex Rage Studio")
+        credit_box.label(text="Version: " + version_str)
 
         col = layout.column(align=True)
         col.operator(UEMark_OT_Operator.bl_idname, text="Mark selected for export", icon="CONSOLE")
