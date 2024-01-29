@@ -35,6 +35,17 @@ Do note, that the code for traversing hierarchy is not the most efficient one an
 2. In Blender: Open User Preferences and under Add-ons click Install from file. Navigate to the downloaded file in step 1 and select it.
 3. It should now appear in the window with Add-ons. You can tick the checkbox to enable it. If the checkbox don't appear search for "ue-helper"
 
+# Ligtmap UV Generation
+
+New feature: the addon can generate now lightmap UVs for objects using Blender's built in lightmap UV generation algorithm.
+
+- Utilizes Blender's built-in lightmap UV generation with a quality setting of 30 and a margin of 0.2.
+- Toggles the 'Generate Lightmap UVs' option in BfU.
+- Effective only during the 'Mark for Export' process.
+- Adds a second UV map exclusively for objects with only one existing UV map.
+  
+<img src="https://github.com/bbn777/ue-helper/blob/main/docs/LightmapUVs.jpg">
+
 # Other
 
 If you like this addon ping me on twitter at https://twitter.com/VertexRage
