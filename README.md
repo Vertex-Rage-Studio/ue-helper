@@ -43,6 +43,7 @@ New feature: the addon can generate now lightmap UVs for objects using Blender's
 - Toggles the 'Generate Lightmap UVs' option in BfU.
 - Effective only during the 'Mark for Export' process.
 - Adds a second UV map exclusively for objects with only one existing UV map.
+- ⚠️Use with care, as it might not be efficient in your case, see [BleuRaven wiki page](https://github.com/xavier150/Blender-For-UnrealEngine-Addons/wiki/Generate-UV-Light-Maps) for more in-depth explanation of what the problem with that method can be.
   
 <img src="https://github.com/bbn777/ue-helper/blob/main/docs/LightmapUVs.jpg">
 
