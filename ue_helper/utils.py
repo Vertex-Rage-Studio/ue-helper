@@ -87,7 +87,7 @@ def generate_lightmap_uvs_for_obj(obj):
         # Generate lightmap UVs
         bpy.ops.object.mode_set(mode='EDIT')
         bpy.ops.mesh.select_all(action='SELECT')
-        bpy.ops.uv.lightmap_pack(PREF_CONTEXT='ALL_FACES', PREF_PACK_IN_ONE=False, PREF_BOX_DIV=30, PREF_MARGIN_DIV=0.2)
+        bpy.ops.uv.lightmap_pack(PREF_CONTEXT='ALL_FACES', PREF_PACK_IN_ONE=False, PREF_BOX_DIV=30, PREF_MARGIN_DIV=1)
         bpy.ops.object.mode_set(mode='OBJECT')
 
         # Reselect the original UV layer
