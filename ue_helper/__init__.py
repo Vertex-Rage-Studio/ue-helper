@@ -49,7 +49,8 @@ def register():
             "- Utilizes Blender's built-in lightmap UV generation with a quality setting of 30 and a margin of 0.2.\n"
             "- Toggles the 'Generate Lightmap UVs' option in BfU.\n"
             "- Effective only during the 'Mark for Export' process.\n"
-            "- Adds a second UV map exclusively for objects with only one existing UV map"
+            "- Adds a second UV map exclusively for objects with only one existing UV map.\n"
+            "- ⚠️ Use with care, as it might not be efficient in your case"
         ),
         default=False
     )
