@@ -35,6 +35,8 @@ Do note, that the code for traversing hierarchy is not the most efficient one an
 2. In Blender: Open User Preferences and under Add-ons click Install from file. Navigate to the downloaded file in step 1 and select it.
 3. It should now appear in the window with Add-ons. You can tick the checkbox to enable it. If the checkbox don't appear search for "ue-helper"
 
+Note, for BfUE 0.4.1 use ue-helper version of 0.0.3. v0.0.4 and onwards are for 0.4.2 and newer.
+
 # Ligtmap UV Generation
 
 New feature: the addon can generate now lightmap UVs for objects using Blender's built in lightmap UV generation algorithm.
