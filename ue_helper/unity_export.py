@@ -1,6 +1,9 @@
 import os
 import bpy
 
+# Unreal collision names, Unity turns them into colliders on import
+COLLISION_PREFIXES = ("UBX_", "USP_", "UCP_", "UCX_")
+
 
 class UEExport2Unity_OT_Operator(bpy.types.Operator):
     bl_idname = "uehelper.export2unity"
@@ -35,9 +38,14 @@ class UEExport2Unity_OT_Operator(bpy.types.Operator):
 
                     export_file = os.path.join(export_subdir, obj.name + '.fbx')
 
-                    # make this object only selected
+                    # make this object and its collision children the only selected
                     obj.select_set(state=True)
                     bpy.context.view_layer.objects.active = obj
+                    collisions = [child for child in obj.children if child.name[:4] in COLLISION_PREFIXES]
+                    for child in collisions:
+                        child.select_set(state=True)
+                        if not child.select_get():
+                            raise RuntimeError(child.name + " can't be selected (hidden?), it would be left out of the export")
 
                     # save and zero location
                     obj_location = obj.location.copy()
@@ -56,6 +64,8 @@ class UEExport2Unity_OT_Operator(bpy.types.Operator):
 
                     # make this object only selected, restore location
                     obj.select_set(state=False)
+                    for child in collisions:
+                        child.select_set(state=False)
                     obj.location = obj_location
 
         return {'FINISHED'}
