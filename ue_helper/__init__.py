@@ -37,7 +37,11 @@ classes = (UEHelper_PT_Panel, UEMark_OT_Operator, UEUnmark_OT_Operator, UEExport
 def register():
     bpy.types.Scene.ue_helper_rotate_z_setting = BoolProperty(
         name="Rotate Z",
-        description="Rotate object in Z by 90 degrees?",
+        description=(
+            "Rotate object in Z by 90 degrees?\n"
+            "Effective only during the 'Mark for Export' process: set it before marking, "
+            "or mark the objects again after changing it"
+        ),
         default=False
     )
 
