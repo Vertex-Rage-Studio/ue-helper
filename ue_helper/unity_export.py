@@ -51,6 +51,14 @@ class UEExport2Unity_OT_Operator(bpy.types.Operator):
                     obj_location = obj.location.copy()
                     obj.location = (0.0, 0.0, 0.0)
 
+                    # collisions go out without materials, Unity would list them as extra slots on the model
+                    collision_materials = []
+                    for child in collisions:
+                        for slot in child.material_slots:
+                            collision_materials.append((child, slot.slot_index, slot.material))
+                    for child, index, material in collision_materials:
+                        child.material_slots[index].material = None
+
                     # EXPORT!
                     print("Exporting ", obj.name, "to file", export_file)
 
@@ -62,10 +70,12 @@ class UEExport2Unity_OT_Operator(bpy.types.Operator):
                                              object_types={'MESH'}
                                              )
 
-                    # make this object only selected, restore location
+                    # make this object only selected, restore location and collision materials
                     obj.select_set(state=False)
                     for child in collisions:
                         child.select_set(state=False)
                     obj.location = obj_location
+                    for child, index, material in collision_materials:
+                        child.material_slots[index].material = material
 
         return {'FINISHED'}
