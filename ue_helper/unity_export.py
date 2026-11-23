@@ -62,12 +62,18 @@ class UEExport2Unity_OT_Operator(bpy.types.Operator):
                     # EXPORT!
                     print("Exporting ", obj.name, "to file", export_file)
 
+                    # same switch BfU uses for the Unreal export, set on mark
+                    colors_type = 'SRGB'
+                    if obj.bfu_vertex_color_import_option == 'IGNORE':
+                        colors_type = 'NONE'
+
                     bpy.ops.export_scene.fbx(filepath=export_file,
                                              check_existing=False,
                                              filter_glob="*.fbx",
                                              use_selection=True,
                                              bake_space_transform=True,
-                                             object_types={'MESH'}
+                                             object_types={'MESH'},
+                                             colors_type=colors_type
                                              )
 
                     # make this object only selected, restore location and collision materials

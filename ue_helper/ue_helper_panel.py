@@ -29,9 +29,11 @@ class UEHelper_PT_Panel(bpy.types.Panel):
         col.operator(UEUnmark_OT_Operator.bl_idname, text="Unmark selected for export", icon="CONSOLE")
 
         layout.separator()
-        layout.label(text="Options:")
-        layout.prop(scene, "ue_helper_rotate_z_setting")
-        layout.prop(scene, "ue_helper_blender_gen_lightmap_uvs")
+        options_box = layout.box()
+        options_box.label(text="Options applied ONLY on mark:", icon="ERROR")
+        options_box.prop(scene, "ue_helper_rotate_z_setting")
+        options_box.prop(scene, "ue_helper_export_vertex_colors")
+        options_box.prop(scene, "ue_helper_blender_gen_lightmap_uvs")
 
         layout.separator()
 

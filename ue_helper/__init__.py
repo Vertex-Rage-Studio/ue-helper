@@ -23,7 +23,7 @@ bl_info = {
     "author": "Vertex Machine @ Vertex Rage Studio",
     "description": "Simple helper addon for Blender For Unreal Engine addon",
     "blender": (4, 0, 0),
-    "version": (0, 0, 9),
+    "version": (0, 0, 10),
     "location": "View3D",
     "warning": "",
     "category": "Import-Export"
@@ -36,9 +36,21 @@ classes = (UEHelper_PT_Panel, UEMark_OT_Operator, UEUnmark_OT_Operator, UEExport
 
 def register():
     bpy.types.Scene.ue_helper_rotate_z_setting = BoolProperty(
-        name="Rotate Z",
+        name="Rotate Z (Unreal)",
         description=(
             "Rotate object in Z by 90 degrees?\n"
+            "Unreal export only, the Unity export ignores it.\n"
+            "Effective only during the 'Mark for Export' process: set it before marking, "
+            "or mark the objects again after changing it"
+        ),
+        default=False
+    )
+
+    bpy.types.Scene.ue_helper_export_vertex_colors = BoolProperty(
+        name="Export vertex colors",
+        description=(
+            "Export vertex colors to Unreal and Unity?\n"
+            "Leave it off when color attributes are only there for texturing (e.g. ID maps).\n"
             "Effective only during the 'Mark for Export' process: set it before marking, "
             "or mark the objects again after changing it"
         ),
@@ -78,4 +90,5 @@ def unregister():
 
     del bpy.types.Scene.ue_helper_unity_expanded
     del bpy.types.Scene.ue_helper_unity_export_path
+    del bpy.types.Scene.ue_helper_export_vertex_colors
     del bpy.types.Scene.ue_helper_rotate_z_setting

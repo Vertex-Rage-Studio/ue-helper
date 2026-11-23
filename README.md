@@ -19,7 +19,10 @@ Let's say you have bunch of objects and you want export subset of those to unrea
 <img src="https://github.com/bbn777/ue-helper/blob/main/docs/01-init.jpg">
 
 
-Select objects that you want to export and click "Mark selected for export" from "UE Helper. If you check "Rotate Z" option, it will add additional 90 degrees rotation on the Z axsis for the export (to match unreal's forward direction if your objects face -Y in Blender).
+Select objects that you want to export and click "Mark selected for export" from "UE Helper". The options under the buttons are applied ONLY when you press the button.
+
+- "Rotate Z (Unreal)" - adds additional 90 degrees rotation on the Z for the BfU exporter (to match unreal's forward direction if your objects face -Y in Blender).
+- "Export vertex colors" - sets "Vertex Color Import Option" in BfU to Replace or Ignore. Off by default, as I typically only use vertex colors for ID maps for texturing. (Experimental Unity support uses this option as well)
 
 <img src="https://github.com/bbn777/ue-helper/blob/main/docs/02-mark.jpg">
 
@@ -42,7 +45,7 @@ Note, for BfUE 0.4.1 use ue-helper version of 0.0.3. v0.0.4 and onwards are for 
 
 New feature: the addon can generate now lightmap UVs for objects using Blender's built in lightmap UV generation algorithm.
 
-- Utilizes Blender's built-in lightmap UV generation with a quality setting of 30 and a margin of 0.2.
+- Utilizes Blender's built-in lightmap UV generation with a quality setting of 30 and a margin of 1.
 - Toggles the 'Generate Lightmap UVs' option in BfU.
 - Effective only during the 'Mark for Export' process.
 - Adds a second UV map exclusively for objects with only one existing UV map.

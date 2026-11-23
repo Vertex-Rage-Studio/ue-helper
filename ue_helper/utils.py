@@ -23,9 +23,11 @@ def turn_collection_hierarchy_into_path(obj):
 def mark_selected(for_export=True, context=None):
     z_rot = False
     lightmap_gen = False
+    vertex_colors = False
     if context:
         z_rot = context.scene.ue_helper_rotate_z_setting
         lightmap_gen = context.scene.ue_helper_blender_gen_lightmap_uvs
+        vertex_colors = context.scene.ue_helper_export_vertex_colors
 
     for obj in bpy.context.selected_objects:
         if for_export:
@@ -35,6 +37,11 @@ def mark_selected(for_export=True, context=None):
                 obj.bfu_additional_rotation_for_export.z = radians(90)
             else:
                 obj.bfu_additional_rotation_for_export.z = 0
+            # the Unity export reads this one too
+            if vertex_colors is True:
+                obj.bfu_vertex_color_import_option = 'REPLACE'
+            else:
+                obj.bfu_vertex_color_import_option = 'IGNORE'
         else:
             obj.bfu_export_type = 'auto'  # Set not for exporting
 
