@@ -22,7 +22,7 @@ Let's say you have bunch of objects and you want export subset of those to unrea
 Select objects that you want to export and click "Mark selected for export" from "UE Helper". The options under the buttons are applied ONLY when you press the button.
 
 - "Rotate Z (Unreal)" - adds additional 90 degrees rotation on the Z for the BfU exporter (to match unreal's forward direction if your objects face -Y in Blender).
-- "Export vertex colors" - sets "Vertex Color Import Option" in BfU to Replace or Ignore. Off by default, as I typically only use vertex colors for ID maps for texturing. (Experimental Unity support uses this option as well)
+- "Export vertex colors" - sets "Vertex Color Import Option" in BfU to Replace (checked) or Ignore (unchecked). Off by default, as I typically only use vertex colors for ID maps for texturing. (Experimental Unity support uses this option as well)
 
 <img src="https://github.com/bbn777/ue-helper/blob/main/docs/02-mark.jpg">
 
