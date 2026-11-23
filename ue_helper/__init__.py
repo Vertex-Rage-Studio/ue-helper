@@ -60,12 +60,12 @@ def register():
     bpy.types.Scene.ue_helper_blender_gen_lightmap_uvs = BoolProperty(
         name="Generate Lightmap UVs",
         description=(
-            "Generate lightmap UVs for selected objects.\n"
-            "Features:\n"
-            "- Utilizes Blender's built-in lightmap UV generation with a quality setting of 30 and a margin of 1.\n"
-            "- Toggles the 'Generate Lightmap UVs' option in BfU.\n"
-            "- Effective only during the 'Mark for Export' process.\n"
-            "- Adds a second UV map exclusively for objects with only one existing UV map.\n"
+            "Generate lightmap UVs in Blender when marking.\n"
+            "- Checked: objects with one UV map get a second one (UVLightmap) from Blender's Lightmap Pack "
+            "(quality 30, margin 1), and 'Generate Lightmap UVs' in BfU is turned off.\n"
+            "- Unchecked: objects with one UV map get 'Generate Lightmap UVs' in BfU turned on, "
+            "so Unreal generates them on import.\n"
+            "- Runs once, on 'Mark for Export'. Marking again doesn't redo it: delete UVLightmap first.\n"
             "- ⚠️ Use only when you know what you are doing"
         ),
         default=False

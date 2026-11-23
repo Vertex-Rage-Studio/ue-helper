@@ -45,10 +45,9 @@ Note, for BfUE 0.4.1 use ue-helper version of 0.0.3. v0.0.4 and onwards are for 
 
 New feature: the addon can generate now lightmap UVs for objects using Blender's built in lightmap UV generation algorithm.
 
-- Utilizes Blender's built-in lightmap UV generation with a quality setting of 30 and a margin of 1.
-- Toggles the 'Generate Lightmap UVs' option in BfU.
-- Effective only during the 'Mark for Export' process.
-- Adds a second UV map exclusively for objects with only one existing UV map.
+- Checked: objects with one UV map get a second one (UVLightmap) from Blender's Lightmap Pack (quality 30, margin 1), and 'Generate Lightmap UVs' in BfU is turned off.
+- Unchecked: objects with one UV map get 'Generate Lightmap UVs' in BfU turned on, so Unreal generates them on import.
+- Runs once, on 'Mark for Export'. Marking again doesn't redo it: delete UVLightmap first.
 - ⚠️Use with care, as it might not be efficient in your case, see [BleuRaven wiki page](https://github.com/xavier150/Blender-For-UnrealEngine-Addons/wiki/Generate-UV-Light-Maps) for more in-depth explanation of what the problem with that method can be.
   
 <img src="https://github.com/bbn777/ue-helper/blob/main/docs/LightmapUVs.jpg">
