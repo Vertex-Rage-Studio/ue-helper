@@ -1,8 +1,14 @@
 import os
+import re
 import bpy
 
-# Unreal collision names, Unity turns them into colliders on import
+# Unreal collision names, children named like this go into the object's fbx
 COLLISION_PREFIXES = ("UBX_", "USP_", "UCP_", "UCX_")
+# LOD levels are children named <object>_LOD1, _LOD2..., they go into the object's fbx,
+# the object itself is level 0
+LOD_NAME = re.compile(r"_LOD\d+$")
+# what unparenting a child for the export changes on it
+TRANSFORM = ("location", "rotation_euler", "rotation_quaternion", "rotation_axis_angle", "scale")
 
 
 class UEExport2Unity_OT_Operator(bpy.types.Operator):
@@ -38,11 +44,12 @@ class UEExport2Unity_OT_Operator(bpy.types.Operator):
 
                     export_file = os.path.join(export_subdir, obj.name + '.fbx')
 
-                    # make this object and its collision children the only selected
+                    # make this object, its collision children and its LOD levels the only selected
                     obj.select_set(state=True)
                     bpy.context.view_layer.objects.active = obj
                     collisions = [child for child in obj.children if child.name[:4] in COLLISION_PREFIXES]
-                    for child in collisions:
+                    lods = [child for child in obj.children if LOD_NAME.search(child.name)]
+                    for child in collisions + lods:
                         child.select_set(state=True)
                         if not child.select_get():
                             raise RuntimeError(child.name + " can't be selected (hidden?), it would be left out of the export")
@@ -67,6 +74,20 @@ class UEExport2Unity_OT_Operator(bpy.types.Operator):
                     if obj.bfu_vertex_color_import_option == 'IGNORE':
                         colors_type = 'NONE'
 
+                    # Unity's importer wants <name>_LOD0, _LOD1... next to each other, so with LOD levels
+                    # the object goes out as level 0 and its children as its siblings
+                    obj_name = obj.name
+                    unparented = []
+                    if lods:
+                        obj.name = obj_name + "_LOD0"
+                        bpy.context.view_layer.update()
+                        for child in collisions + lods:
+                            transform = {name: tuple(getattr(child, name)) for name in TRANSFORM}
+                            unparented.append((child, child.matrix_parent_inverse.copy(), transform))
+                            world = child.matrix_world.copy()
+                            child.parent = None
+                            child.matrix_world = world
+
                     bpy.ops.export_scene.fbx(filepath=export_file,
                                              check_existing=False,
                                              filter_glob="*.fbx",
@@ -76,9 +97,15 @@ class UEExport2Unity_OT_Operator(bpy.types.Operator):
                                              colors_type=colors_type
                                              )
 
-                    # make this object only selected, restore location and collision materials
+                    # make this object only selected, restore name, parenting, location and collision materials
+                    obj.name = obj_name
+                    for child, parent_inverse, transform in unparented:
+                        child.parent = obj
+                        child.matrix_parent_inverse = parent_inverse
+                        for name, value in transform.items():
+                            setattr(child, name, value)
                     obj.select_set(state=False)
-                    for child in collisions:
+                    for child in collisions + lods:
                         child.select_set(state=False)
                     obj.location = obj_location
                     for child, index, material in collision_materials:
